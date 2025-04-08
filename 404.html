@@ -1,1 +1,119 @@
-<!DOCTYPE html><html><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>404</title><link rel="icon" href="f.ico"><link href="https://fonts.googleapis.com/css2?family=Pixelify+Sans:wght@400..700&display=swap" rel="stylesheet"><style>body{background:#000;color:#f6f;font-family:'Pixelify Sans',cursive;display:flex;justify-content:center;align-items:center;height:100vh;margin:0;overflow:hidden}#t{font-size:48px;letter-spacing:2px;text-shadow:0 0 10px #f6f;height:60px;position:relative}.s{position:absolute;width:4px;height:4px;background:#f6f;border-radius:50%;pointer-events:none;opacity:0;animation:k 1s ease-out}@keyframes k{0%{transform:translate(0,0) scale(0);opacity:1}100%{transform:translate(var(--x),var(--y)) scale(1);opacity:0}}.g{animation:g 2s ease-in-out infinite alternate}@keyframes g{from{text-shadow:0 0 5px #f6f}to{text-shadow:0 0 20px #f6f,0 0 30px #f6f}}</style></head><body><div id="t" class="g"></div><script>let a="sxxi.lol",b=0,c=document.getElementById("t");function d(e,f){let g=document.createElement("div");g.className="s";let h=Math.random()*Math.PI*2,i=20+30*Math.random(),j=Math.cos(h)*i,k=Math.sin(h)*i;g.style.setProperty("--x",`${j}px`);g.style.setProperty("--y",`${k}px`);g.style.left=`${e}px`;g.style.top=`${f}px`;document.body.appendChild(g);setTimeout(()=>g.remove(),1e3)}function l(){if(b<a.length){c.textContent+=a[b];let m=c.getBoundingClientRect();for(let n=0;n<5;n++)d(m.left+m.width/2+(Math.random()-.5)*100,m.top+m.height/2+(Math.random()-.5)*50);b++;setTimeout(l,4e3/a.length)}else setTimeout(()=>{window.location.href="https://sxxi.lol"},500)}setTimeout(l,300);setInterval(()=>{let m=c.getBoundingClientRect();d(m.left+Math.random()*m.width,m.top+Math.random()*m.height)},300);</script></body></html>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Error 404</title>
+    <link rel="icon" href="favi.ico" type="image/x-icon">
+    <link href="https://fonts.googleapis.com/css2?family=Pixelify+Sans:wght@400..700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            background-color: #000000;
+            color: #ff69f5;
+            font-family: 'Pixelify Sans', cursive;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            overflow: hidden;
+        }
+        
+        #pixel-text {
+            font-size: 48px;
+            letter-spacing: 2px;
+            text-shadow: 0 0 10px #ff69f5;
+            height: 60px;
+            position: relative;
+        }
+        
+        .sparkle {
+            position: absolute;
+            width: 4px;
+            height: 4px;
+            background-color: #ff69f5;
+            border-radius: 50%;
+            pointer-events: none;
+            opacity: 0;
+            animation: sparkle 1s ease-out;
+        }
+        
+        @keyframes sparkle {
+            0% {
+                transform: translate(0, 0) scale(0);
+                opacity: 1;
+            }
+            100% {
+                transform: translate(var(--tx), var(--ty)) scale(1);
+                opacity: 0;
+            }
+        }
+        
+        .glow {
+            animation: glow 2s ease-in-out infinite alternate;
+        }
+        
+        @keyframes glow {
+            from {
+                text-shadow: 0 0 5px #ff69f5;
+            }
+            to {
+                text-shadow: 0 0 20px #ff69f5, 0 0 30px #ff69f5;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div id="pixel-text" class="glow"></div>
+    
+    <script>
+        const targetText = "skidiot.lol";
+        let currentIndex = 0;
+        const pixelText = document.getElementById('pixel-text');
+        
+        function createSparkle(x, y) {
+            const sparkle = document.createElement('div');
+            sparkle.className = 'sparkle';
+            const angle = Math.random() * Math.PI * 2;
+            const distance = 20 + Math.random() * 30;
+            const tx = Math.cos(angle) * distance;
+            const ty = Math.sin(angle) * distance;
+            sparkle.style.setProperty('--tx', `${tx}px`);
+            sparkle.style.setProperty('--ty', `${ty}px`);
+            sparkle.style.left = `${x}px`;
+            sparkle.style.top = `${y}px`;
+            document.body.appendChild(sparkle);
+            setTimeout(() => sparkle.remove(), 1000);
+        }
+        
+        function typeText() {
+            if (currentIndex < targetText.length) {
+                pixelText.textContent += targetText[currentIndex];
+                const rect = pixelText.getBoundingClientRect();
+                for (let i = 0; i < 5; i++) {
+                    createSparkle(
+                        rect.left + rect.width/2 + (Math.random() - 0.5) * 100,
+                        rect.top + rect.height/2 + (Math.random() - 0.5) * 50
+                    );
+                }
+                currentIndex++;
+                setTimeout(typeText, 4000 / targetText.length);
+            } else {
+                setTimeout(() => {
+                    window.location.href = "https://skidiot.lol";
+                }, 500);
+            }
+        }
+        
+        setTimeout(typeText, 300);
+        
+        setInterval(() => {
+            const rect = pixelText.getBoundingClientRect();
+            createSparkle(
+                rect.left + Math.random() * rect.width,
+                rect.top + Math.random() * rect.height
+            );
+        }, 300);
+    </script>
+</body>
+</html>
