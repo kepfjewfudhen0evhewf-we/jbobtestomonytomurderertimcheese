@@ -3,16 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Skidiots.lol</title>
+    <title>Skidiot.lol</title>
     <link rel="icon" href="Favi.ico" type="image/x-icon">
     <link href="https://fonts.googleapis.com/css2?family=Skranji:wght@400;700&family=Merriweather:wght@400;700&display=swap" rel="stylesheet">
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-        
+        * { margin: 0; padding: 0; box-sizing: border-box; }
         body {
             font-family: 'Arial', sans-serif;
             background-color: #000;
@@ -20,7 +15,6 @@
             min-height: 100vh;
             overflow-x: hidden;
         }
-
         .stars {
             position: fixed;
             top: 0;
@@ -29,7 +23,6 @@
             height: 100%;
             z-index: -1;
         }
-
         .star {
             position: absolute;
             background-color: #ff69f5;
@@ -37,12 +30,90 @@
             filter: blur(0.5px);
             animation: twinkle var(--duration) infinite ease-in-out;
         }
-
         @keyframes twinkle {
             0%, 100% { opacity: var(--min-opacity); }
             50% { opacity: var(--max-opacity); }
         }
-        
+        .menu-toggle {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            z-index: 100;
+            cursor: pointer;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-around;
+            padding: 5px;
+            background: rgba(0, 0, 0, 0.5);
+            border: 1px solid #ff69f5;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(255, 105, 245, 0.5);
+            transition: all 0.3s ease;
+        }
+        .menu-toggle:hover {
+            transform: scale(1.1);
+            box-shadow: 0 0 15px rgba(255, 105, 245, 0.8);
+        }
+        .menu-line {
+            width: 100%;
+            height: 3px;
+            background-color: #ff69f5;
+            border-radius: 3px;
+            transition: all 0.3s ease;
+            box-shadow: 0 0 5px #ff69f5;
+        }
+        .menu-toggle.active .menu-line:nth-child(1) {
+            transform: translateY(8px) rotate(45deg);
+        }
+        .menu-toggle.active .menu-line:nth-child(2) {
+            opacity: 0;
+        }
+        .menu-toggle.active .menu-line:nth-child(3) {
+            transform: translateY(-8px) rotate(-45deg);
+        }
+        .side-menu {
+            position: fixed;
+            top: 0;
+            left: -300px;
+            width: 250px;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.95);
+            border-right: 2px solid #ff69f5;
+            box-shadow: 0 0 20px rgba(255, 105, 245, 0.7);
+            z-index: 99;
+            transition: all 0.3s ease;
+            padding-top: 80px;
+            overflow-y: auto;
+        }
+        .side-menu.active {
+            left: 0;
+        }
+        .side-menu ul {
+            list-style: none;
+            padding: 0 20px;
+        }
+        .side-menu li {
+            margin-bottom: 15px;
+        }
+        .side-menu a {
+            color: #ff69f5;
+            text-decoration: none;
+            font-family: 'Skranji', cursive;
+            font-size: 1.2rem;
+            display: block;
+            padding: 8px 10px;
+            border-radius: 5px;
+            transition: all 0.3s ease;
+            text-shadow: 0 0 5px rgba(255, 105, 245, 0.5);
+        }
+        .side-menu a:hover {
+            background-color: rgba(255, 105, 245, 0.1);
+            text-shadow: 0 0 10px #ff69f5;
+            transform: translateX(5px);
+            box-shadow: 0 0 10px rgba(255, 105, 245, 0.3);
+        }
         .main-title {
             font-family: 'Skranji', cursive;
             font-size: 4rem;
@@ -54,19 +125,16 @@
             animation: glow 2s infinite alternate;
             position: relative;
         }
-        
         @keyframes glow {
             from { text-shadow: 0 0 10px #ff69f5; }
             to { text-shadow: 0 0 20px #ff69f5, 0 0 30px #ff69f5; }
         }
-
         .search-container {
             display: flex;
             justify-content: center;
             margin-bottom: 2rem;
             width: 100%;
         }
-
         .search-bar {
             width: 50%;
             max-width: 500px;
@@ -80,16 +148,13 @@
             box-shadow: 0 0 10px rgba(255, 105, 245, 0.3);
             transition: all 0.3s ease;
         }
-
         .search-bar:focus {
             border-color: #ff69f5;
             box-shadow: 0 0 15px rgba(255, 105, 245, 0.6);
         }
-
         .search-bar::placeholder {
             color: #aaa;
         }
-        
         .pastes-container {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
@@ -100,7 +165,6 @@
             padding-bottom: 40px;
             position: relative;
         }
-        
         .paste-box {
             min-height: 200px;
             border: 1px solid #ff69f5;
@@ -110,7 +174,6 @@
             font-family: 'Merriweather', serif;
             backdrop-filter: blur(2px);
         }
-        
         .box-title {
             font-size: 1.5rem;
             margin-bottom: 15px;
@@ -120,7 +183,6 @@
             text-align: center;
             font-family: 'Skranji', cursive;
         }
-        
         .image-container {
             width: 100%;
             margin-bottom: 15px;
@@ -133,18 +195,15 @@
             align-items: center;
             box-shadow: 0 0 8px rgba(255, 105, 245, 0.5);
         }
-        
         .paste-image {
             max-width: 100%;
             max-height: 300px;
             object-fit: contain;
             display: block;
         }
-        
         .paste-field {
             margin-bottom: 12px;
         }
-        
         .field-label {
             display: block;
             font-weight: bold;
@@ -152,47 +211,39 @@
             margin-bottom: 4px;
             font-size: 0.9rem;
         }
-        
         .field-value {
             font-family: 'Merriweather', serif;
             padding: 8px;
             background: rgba(20, 20, 20, 0.5);
             border: 1px solid #333;
             border-radius: 3px;
-            word-break: break-all;
+            word-break: break-word;
         }
-        
         .socials-field .field-value {
             color: #ff69f5;
         }
-        
         .socials-field .field-value a {
             color: #ff69f5;
             text-decoration: none;
             transition: all 0.2s ease;
             display: inline-block;
         }
-        
         .socials-field .field-value a:hover {
             transform: scale(1.05);
             text-shadow: 0 0 8px rgba(255, 105, 245, 0.7);
         }
-        
         @media (max-width: 600px) {
             .main-title {
                 font-size: 2.5rem;
             }
-            
             .search-bar {
                 width: 80%;
                 padding: 10px 15px;
             }
-            
             .pastes-container {
                 grid-template-columns: 1fr;
                 width: 95%;
             }
-            
             .paste-image {
                 max-height: 200px;
             }
@@ -201,13 +252,23 @@
 </head>
 <body>
     <div class="stars" id="starfield"></div>
-
+    <div class="menu-toggle" id="menuToggle">
+        <div class="menu-line"></div>
+        <div class="menu-line"></div>
+        <div class="menu-line"></div>
+    </div>
+    <div class="side-menu" id="sideMenu">
+        <ul>
+            <li><a href="https://skidiot.lol">Home</a></li>
+            <li><a href="https://skidiot.lol/About">About</a></li>
+            <li><a href="https://skidiot.lol/Contact">Contact</a></li>
+            <li><a href="https://skidiot.lol/Faq">FAQ</a></li>
+        </ul>
+    </div>
     <h1 class="main-title">Skidiot.lol</h1>
-    
     <div class="search-container">
         <input type="text" class="search-bar" id="searchBar" placeholder="Search pastes by name...">
     </div>
-    
     <div class="pastes-container" id="pastesContainer">
         <div class="paste-box">
             <h2 class="box-title">Putty</h2>
@@ -233,7 +294,6 @@
                 <div class="field-value">superspookyfemboyofdoomfr</div>
             </div>
         </div>
-        
         <div class="paste-box">
             <h2 class="box-title">Kardi</h2>
             <div class="image-container">
@@ -250,7 +310,7 @@
             <div class="paste-field socials-field">
                 <span class="field-label">Socials</span>
                 <div class="field-value">
-                    <a href="pornhub.com" target="_blank">pornhub.com</a>
+                    <a href="https://pornhub.com" target="_blank">pornhub.com</a>
                 </div>
             </div>
             <div class="paste-field">
@@ -259,21 +319,17 @@
             </div>
         </div>
     </div>
-    
     <script>
-        // Create starfield
         const starfield = document.getElementById('starfield');
         for (let i = 0; i < 100; i++) {
             const star = document.createElement('div');
             star.className = 'star';
-            
             const x = Math.random() * 100;
             const y = Math.random() * 100;
             const size = Math.random() * 2 + 1;
             const duration = Math.random() * 3 + 2;
             const minOpacity = Math.random() * 0.3 + 0.1;
             const maxOpacity = Math.random() * 0.5 + 0.5;
-            
             star.style.left = `${x}vw`;
             star.style.top = `${y}vh`;
             star.style.width = `${size}px`;
@@ -282,60 +338,39 @@
             star.style.setProperty('--min-opacity', minOpacity);
             star.style.setProperty('--max-opacity', maxOpacity);
             star.style.animationDelay = `${Math.random() * 5}s`;
-            
             starfield.appendChild(star);
         }
-
-        // Search functionality
         const searchBar = document.getElementById('searchBar');
         const pastesContainer = document.getElementById('pastesContainer');
-
         function filterPastes() {
             const searchTerm = searchBar.value.toLowerCase();
             const pasteBoxes = pastesContainer.querySelectorAll('.paste-box');
-            
             pasteBoxes.forEach(box => {
                 const title = box.querySelector('.box-title').textContent.toLowerCase();
-                if (title.includes(searchTerm)) {
-                    box.style.display = 'block';
-                } else {
-                    box.style.display = 'none';
-                }
+                box.style.display = title.includes(searchTerm) ? 'block' : 'none';
             });
         }
-
         searchBar.addEventListener('input', filterPastes);
-
-        function addPaste(title, imageSrc, reason, com, socialUrl, alias) {
-            const pasteHTML = `
-                <div class="paste-box">
-                    <h2 class="box-title">${title}</h2>
-                    <div class="image-container">
-                        <img src="${imageSrc}" class="paste-image" alt="Proof">
-                    </div>
-                    <div class="paste-field">
-                        <span class="field-label">Reason</span>
-                        <div class="field-value">${reason}</div>
-                    </div>
-                    <div class="paste-field">
-                        <span class="field-label">COM</span>
-                        <div class="field-value">${com}</div>
-                    </div>
-                    <div class="paste-field socials-field">
-                        <span class="field-label">Socials</span>
-                        <div class="field-value">
-                            <a href="${socialUrl}" target="_blank">${socialUrl.replace(/^https?:\/\//, '')}</a>
-                        </div>
-                    </div>
-                    <div class="paste-field">
-                        <span class="field-label">Alias</span>
-                        <div class="field-value">${alias}</div>
-                    </div>
-                </div>
-            `;
-            pastesContainer.insertAdjacentHTML('beforeend', pasteHTML);
-            filterPastes();
-        }
+        const menuToggle = document.getElementById('menuToggle');
+        const sideMenu = document.getElementById('sideMenu');
+        menuToggle.addEventListener('click', function(e) {
+            e.stopPropagation();
+            this.classList.toggle('active');
+            sideMenu.classList.toggle('active');
+        });
+        document.addEventListener('click', function(e) {
+            if (!sideMenu.contains(e.target) && e.target !== menuToggle) {
+                menuToggle.classList.remove('active');
+                sideMenu.classList.remove('active');
+            }
+        });
+        const menuItems = sideMenu.querySelectorAll('a');
+        menuItems.forEach(item => {
+            item.addEventListener('click', function() {
+                menuToggle.classList.remove('active');
+                sideMenu.classList.remove('active');
+            });
+        });
     </script>
 </body>
 </html>
