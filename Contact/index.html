@@ -1,1 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Me - Skidiot.lol</title>
+    <link rel="icon" href="Favi.ico" type="image/x-icon">
+    <link href="https://fonts.googleapis.com/css2?family=Skranji:wght@400;700&family=Merriweather:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        body {
+            font-family: 'Arial', sans-serif;
+            color: #fff;
+            min-height: 100vh;
+            overflow-x: hidden;
+            position: relative;
+            background-color: black;
+            background-image: url('background.gif');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+        }
+
+        .blur-background {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.6);
+            filter: blur(8px);
+            z-index: -1;
+        }
+
+        .menu-toggle {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            z-index: 100;
+            cursor: pointer;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-around;
+            padding: 5px;
+            background: rgba(0, 0, 0, 0.5);
+            border: 1px solid #ff69f5;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(255, 105, 245, 0.5);
+            transition: all 0.3s ease;
+        }
+
+        .menu-toggle:hover {
+            transform: scale(1.1);
+            box-shadow: 0 0 15px rgba(255, 105, 245, 0.8);
+        }
+
+        .menu-line {
+            width: 100%;
+            height: 3px;
+            background-color: #ff69f5;
+            border-radius: 3px;
+            transition: all 0.3s ease;
+            box-shadow: 0 0 5px #ff69f5;
+        }
+
+        .menu-toggle.active .menu-line:nth-child(1) {
+            transform: translateY(8px) rotate(45deg);
+        }
+
+        .menu-toggle.active .menu-line:nth-child(2) {
+            opacity: 0;
+        }
+
+        .menu-toggle.active .menu-line:nth-child(3) {
+            transform: translateY(-8px) rotate(-45deg);
+        }
+
+        .side-menu {
+            position: fixed;
+            top: 0;
+            left: -300px;
+            width: 250px;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.95);
+            border-right: 2px solid #ff69f5;
+            box-shadow: 0 0 20px rgba(255, 105, 245, 0.7);
+            z-index: 99;
+            transition: all 0.3s ease;
+            padding-top: 80px;
+            overflow-y: auto;
+        }
+
+        .side-menu.active {
+            left: 0;
+        }
+
+        .side-menu ul {
+            list-style: none;
+            padding: 0 20px;
+        }
+
+        .side-menu li {
+            margin-bottom: 15px;
+        }
+
+        .side-menu a {
+            color: #ff69f5;
+            text-decoration: none;
+            font-family: 'Skranji', cursive;
+            font-size: 1.2rem;
+            display: block;
+            padding: 8px 10px;
+            border-radius: 5px;
+            transition: all 0.3s ease;
+            text-shadow: 0 0 5px rgba(255, 105, 245, 0.5);
+        }
+
+        .side-menu a:hover {
+            background-color: rgba(255, 105, 245, 0.1);
+            text-shadow: 0 0 10px #ff69f5;
+            transform: translateX(5px);
+            box-shadow: 0 0 10px rgba(255, 105, 245, 0.3);
+        }
+
+        .main-title {
+            font-family: 'Skranji', cursive;
+            font-size: 4rem;
+            color: #ff69f5;
+            text-align: center;
+            margin-top: 2rem;
+            margin-bottom: 1rem;
+            text-shadow: 0 0 15px #ff69f5;
+            animation: glow 2s infinite alternate;
+            position: relative;
+        }
+
+        @keyframes glow {
+            from { text-shadow: 0 0 10px #ff69f5; }
+            to { text-shadow: 0 0 20px #ff69f5, 0 0 30px #ff69f5; }
+        }
+
+        .contact-icons {
+            display: flex;
+            justify-content: center;
+            margin-top: 2rem;
+        }
+
+        .contact-icon {
+            margin: 0 30px;
+            transition: transform 0.3s ease, filter 0.3s ease;
+        }
+
+        .contact-icon img {
+            width: 100px;
+            height: 100px;
+            filter: glow(0 0 5px #ff69f5);
+            transition: transform 0.3s ease;
+        }
+
+        .contact-icon:hover {
+            transform: scale(1.3);
+            filter: glow(0 0 10px #ff69f5);
+        }
+
+        .contact-icon:active {
+            transform: scale(1);
+        }
+    </style>
+</head>
+<body>
+    <div class="blur-background"></div>
+    <div class="menu-toggle" id="menuToggle">
+        <div class="menu-line"></div>
+        <div class="menu-line"></div>
+        <div class="menu-line"></div>
+    </div>
+    <div class="side-menu" id="sideMenu">
+        <ul>
+            <li><a href="https://skidiot.lol">Home</a></li>
+            <li><a href="https://skidiot.lol/About">About</a></li>
+            <li><a href="https://skidiot.lol/Contact">Contact</a></li>
+            <li><a href="https://skidiot.lol/Faq">FAQ</a></li>
+        </ul>
+    </div>
+    <h1 class="main-title">Contact Me - Skidiot.lol</h1>
+    <div class="contact-icons">
+        <a href="https://t.me/puttylover" target="_blank" class="contact-icon" title="Telegram">
+            <img src="Telegram.png" alt="Telegram Icon">
+        </a>
+        <a href="mailto:Putty@skidiot.lol" target="_blank" class="contact-icon" title="Email">
+            <img src="Email.png" alt="Email Icon">
+        </a>
+    </div>
+    <script>
+        const menuToggle = document.getElementById('menuToggle');
+        const sideMenu = document.getElementById('sideMenu');
+        menuToggle.addEventListener('click', function(e) {
+            e.stopPropagation();
+            this.classList.toggle('active');
+            sideMenu.classList.toggle('active');
+        });
+        document.addEventListener('click', function(e) {
+            if (!sideMenu.contains(e.target) && e.target !== menuToggle) {
+                menuToggle.classList.remove('active');
+                sideMenu.classList.remove('active');
+            }
+        });
+        const menuItems = sideMenu.querySelectorAll('a');
+        menuItems.forEach(item => {
+            item.addEventListener('click', function() {
+                menuToggle.classList.remove('active');
+                sideMenu.classList.remove('active');
+            });
+        });
+    </script>
+</body>
+</html>
 
