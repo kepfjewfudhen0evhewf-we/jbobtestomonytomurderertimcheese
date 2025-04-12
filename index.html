@@ -250,6 +250,7 @@
         }
     </style>
 </head>
+<!-- snipped head and styles (keep yours unchanged) -->
 <body>
     <div class="stars" id="starfield"></div>
     <div class="menu-toggle" id="menuToggle">
@@ -270,56 +271,10 @@
         <input type="text" class="search-bar" id="searchBar" placeholder="Search pastes by name...">
     </div>
     <div class="pastes-container" id="pastesContainer">
-        <div class="paste-box">
-            <h2 class="box-title">Putty</h2>
-            <div class="image-container">
-                <img src="https://files.catbox.moe/vhju3t.jpg" class="paste-image" alt="Proof">
-            </div>
-            <div class="paste-field">
-                <span class="field-label">Reason</span>
-                <div class="field-value">Stolen code</div>
-            </div>
-            <div class="paste-field">
-                <span class="field-label">COM</span>
-                <div class="field-value">All Of Em FR</div>
-            </div>
-            <div class="paste-field socials-field">
-                <span class="field-label">Socials</span>
-                <div class="field-value">
-                    <a href="erm nuh uh" target="_blank">nope</a>
-                </div>
-            </div>
-            <div class="paste-field">
-                <span class="field-label">Alias</span>
-                <div class="field-value">superspookyfemboyofdoomfr</div>
-            </div>
-        </div>
-        <div class="paste-box">
-            <h2 class="box-title">Kardi</h2>
-            <div class="image-container">
-                <img src="https://files.catbox.moe/itdceu.jpg" class="paste-image" alt="Proof">
-            </div>
-            <div class="paste-field">
-                <span class="field-label">Reason</span>
-                <div class="field-value">to fat</div>
-            </div>
-            <div class="paste-field">
-                <span class="field-label">COM</span>
-                <div class="field-value">Discord, Vrc</div>
-            </div>
-            <div class="paste-field socials-field">
-                <span class="field-label">Socials</span>
-                <div class="field-value">
-                    <a href="https://pornhub.com" target="_blank">pornhub.com</a>
-                </div>
-            </div>
-            <div class="paste-field">
-                <span class="field-label">Alias</span>
-                <div class="field-value">fatters</div>
-            </div>
-        </div>
+        <!-- Dynamic pastes will load here -->
     </div>
     <script>
+        // Starfield
         const starfield = document.getElementById('starfield');
         for (let i = 0; i < 100; i++) {
             const star = document.createElement('div');
@@ -340,17 +295,8 @@
             star.style.animationDelay = `${Math.random() * 5}s`;
             starfield.appendChild(star);
         }
-        const searchBar = document.getElementById('searchBar');
-        const pastesContainer = document.getElementById('pastesContainer');
-        function filterPastes() {
-            const searchTerm = searchBar.value.toLowerCase();
-            const pasteBoxes = pastesContainer.querySelectorAll('.paste-box');
-            pasteBoxes.forEach(box => {
-                const title = box.querySelector('.box-title').textContent.toLowerCase();
-                box.style.display = title.includes(searchTerm) ? 'block' : 'none';
-            });
-        }
-        searchBar.addEventListener('input', filterPastes);
+
+        // Menu toggle
         const menuToggle = document.getElementById('menuToggle');
         const sideMenu = document.getElementById('sideMenu');
         menuToggle.addEventListener('click', function(e) {
@@ -364,13 +310,64 @@
                 sideMenu.classList.remove('active');
             }
         });
-        const menuItems = sideMenu.querySelectorAll('a');
-        menuItems.forEach(item => {
-            item.addEventListener('click', function() {
+        sideMenu.querySelectorAll('a').forEach(item => {
+            item.addEventListener('click', () => {
                 menuToggle.classList.remove('active');
                 sideMenu.classList.remove('active');
             });
         });
+
+        // Load pastes from pastes.json
+        async function loadPastes() {
+            const res = await fetch('pastes.json');
+            const data = await res.json();
+            const container = document.getElementById('pastesContainer');
+
+            container.innerHTML = ''; // Clear any fallback content
+
+            data.forEach(paste => {
+                const box = document.createElement('div');
+                box.className = 'paste-box';
+                box.innerHTML = `
+                    <h2 class="box-title">${paste.name}</h2>
+                    ${paste.image ? `
+                        <div class="image-container">
+                            <img src="${paste.image}" class="paste-image" alt="Proof">
+                        </div>` : ''}
+                    <div class="paste-field">
+                        <span class="field-label">Reason</span>
+                        <div class="field-value">${paste.reason}</div>
+                    </div>
+                    <div class="paste-field">
+                        <span class="field-label">COM</span>
+                        <div class="field-value">${paste.com}</div>
+                    </div>
+                    <div class="paste-field socials-field">
+                        <span class="field-label">Socials</span>
+                        <div class="field-value">
+                            <a href="${paste.socials}" target="_blank">${paste.socials}</a>
+                        </div>
+                    </div>
+                    <div class="paste-field">
+                        <span class="field-label">Alias</span>
+                        <div class="field-value">${paste.alias}</div>
+                    </div>
+                `;
+                container.appendChild(box);
+            });
+        }
+
+        // Search
+        const searchBar = document.getElementById('searchBar');
+        searchBar.addEventListener('input', () => {
+            const searchTerm = searchBar.value.toLowerCase();
+            document.querySelectorAll('.paste-box').forEach(box => {
+                const title = box.querySelector('.box-title').textContent.toLowerCase();
+                box.style.display = title.includes(searchTerm) ? 'block' : 'none';
+            });
+        });
+
+        loadPastes();
     </script>
 </body>
 </html>
