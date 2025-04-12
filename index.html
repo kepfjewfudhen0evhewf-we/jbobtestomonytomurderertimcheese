@@ -323,7 +323,7 @@
     const data = await res.json();
     const container = document.getElementById('pastesContainer');
 
-    container.innerHTML = ''; // Clear any fallback content
+    container.innerHTML = '';
 
     data.forEach(paste => {
         const box = document.createElement('div');
