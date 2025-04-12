@@ -1,12 +1,11 @@
-<html lang="en"><head></head><body><
-
-
-
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Putty</title>
-  <link rel="icon" href="images/Crown.ico" type="image/x-icon">
-  <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+  <link rel="icon" href="images/Crown.ico" type="image/x-icon" />
+  <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet" />
   <style>
     body, html {
       margin: 0;
@@ -131,36 +130,40 @@
       50% { border-color: white; }
     }
   </style>
-
-
+</head>
+<body>
   <div class="overlay">
     <div class="overlay-text">Click To Enter Putty's Galaxy</div>
   </div>
+
   <canvas id="starfield"></canvas>
+
   <div class="blurred-rectangle">
     <div class="image-container">
-      <img src="images/demon.jpg" alt="Demon Image">
+      <img src="images/demon.jpg" alt="Demon Image" />
     </div>
     <div class="text-container">Putty</div>
     <div class="icon-container">
       <a href="https://t.me/puttylover" target="_blank">
-        <img src="images/othertele.png" alt="Telegram">
+        <img src="images/othertele.png" alt="Telegram" />
       </a>
       <a href="https://vrchat.com/home/user/usr_17e28ac5-6153-4beb-bba4-190a29d8ce83" target="_blank">
-        <img src="images/vrchat.svg" alt="VRChat">
+        <img src="images/vrchat.svg" alt="VRChat" />
       </a>
       <a href="https://discord.com/users/1187445408142737428" target="_blank">
-        <img src="images/discord.svg" alt="Discord">
+        <img src="images/discord.svg" alt="Discord" />
       </a>
       <a href="https://x.com/PuttyLover_" target="_blank">
-        <img src="images/x.png" alt="X">
+        <img src="images/x.png" alt="X" />
       </a>
     </div>
     <div class="typing-container">
       <div class="typing-text" id="typing-text"></div>
     </div>
   </div>
+
   <audio id="background-music" src="media/LikeHim.mp3"></audio>
+
   <script>
     const canvas = document.getElementById('starfield');
     const ctx = canvas.getContext('2d');
@@ -171,14 +174,17 @@
     const numStars = 1000;
     const starSpeed = 0.05;
 
-    for (let i = 0; i < numStars; i++) {
-      stars.push({
-        x: Math.random() * canvas.width,
-        y: Math.random() * canvas.height,
-        size: Math.random() * 2 + 1,
-        brightness: Math.random() * 0.5 + 0.5,
-        glimmerSpeed: Math.random() * 0.02 + 0.01
-      });
+    function initStars() {
+      stars.length = 0;
+      for (let i = 0; i < numStars; i++) {
+        stars.push({
+          x: Math.random() * canvas.width,
+          y: Math.random() * canvas.height,
+          size: Math.random() * 2 + 1,
+          brightness: Math.random() * 0.5 + 0.5,
+          glimmerSpeed: Math.random() * 0.02 + 0.01
+        });
+      }
     }
 
     function drawStars() {
@@ -230,7 +236,6 @@
       "erm I'm witteraly in da mainfwame"
     ];
 
-    // Randomize the quotes
     quotes.sort(() => Math.random() - 0.5);
 
     let quoteIndex = 0;
@@ -273,11 +278,12 @@
     window.addEventListener('resize', () => {
       canvas.width = window.innerWidth;
       canvas.height = window.innerHeight;
+      initStars();
     });
 
+    initStars();
     animate();
     typeQuote();
   </script>
-
-
-    </body></html>
+</body>
+</html>
