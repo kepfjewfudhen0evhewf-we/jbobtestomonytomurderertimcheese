@@ -1,13 +1,28 @@
 [
   {
-    "title": "Example Paste",
-    "image": "https://example.com/image.jpg",
-    "reason": "Caught cheating in-game.",
-    "com": "They admitted it in chat.",
+    "title": "Putty",
+    "image": "https://files.catbox.moe/vhju3t.jpg",
+    "reason": "Stolen code",
+    "com": "All Of Em FR",
     "socials": [
-      { "label": "Twitter", "url": "https://twitter.com/example" },
-      { "label": "Discord", "url": "https://discord.com/example" }
+      {
+        "label": "nope",
+        "url": "erm nuh uh"
+      }
     ],
-    "alias": "Cheater123"
+    "alias": "superspookyfemboyofdoomfr"
+  },
+  {
+    "title": "Kardi",
+    "image": "https://files.catbox.moe/itdceu.jpg",
+    "reason": "to fat",
+    "com": "Discord, Vrc",
+    "socials": [
+      {
+        "label": "pornhub.com",
+        "url": "https://pornhub.com"
+      }
+    ],
+    "alias": "fatters"
   }
 ]
