@@ -250,7 +250,7 @@
         }
     </style>
 </head>
-<!-- snipped head and styles (keep yours unchanged) -->
+
 <body>
     <div class="stars" id="starfield"></div>
     <div class="menu-toggle" id="menuToggle">
@@ -271,10 +271,10 @@
         <input type="text" class="search-bar" id="searchBar" placeholder="Search pastes by name...">
     </div>
     <div class="pastes-container" id="pastesContainer">
-        <!-- Dynamic pastes will load here -->
+        
     </div>
     <script>
-        // Starfield
+        
         const starfield = document.getElementById('starfield');
         for (let i = 0; i < 100; i++) {
             const star = document.createElement('div');
@@ -296,7 +296,7 @@
             starfield.appendChild(star);
         }
 
-        // Menu toggle
+        
         const menuToggle = document.getElementById('menuToggle');
         const sideMenu = document.getElementById('sideMenu');
         menuToggle.addEventListener('click', function(e) {
@@ -317,47 +317,50 @@
             });
         });
 
-        // Load pastes from pastes.json
+        
         async function loadPastes() {
-            const res = await fetch('pastes.json');
-            const data = await res.json();
-            const container = document.getElementById('pastesContainer');
+    const res = await fetch('pastes.json');
+    const data = await res.json();
+    const container = document.getElementById('pastesContainer');
 
-            container.innerHTML = ''; // Clear any fallback content
+    container.innerHTML = ''; // Clear any fallback content
 
-            data.forEach(paste => {
-                const box = document.createElement('div');
-                box.className = 'paste-box';
-                box.innerHTML = `
-                    <h2 class="box-title">${paste.name}</h2>
-                    ${paste.image ? `
-                        <div class="image-container">
-                            <img src="${paste.image}" class="paste-image" alt="Proof">
-                        </div>` : ''}
-                    <div class="paste-field">
-                        <span class="field-label">Reason</span>
-                        <div class="field-value">${paste.reason}</div>
-                    </div>
-                    <div class="paste-field">
-                        <span class="field-label">COM</span>
-                        <div class="field-value">${paste.com}</div>
-                    </div>
-                    <div class="paste-field socials-field">
-                        <span class="field-label">Socials</span>
-                        <div class="field-value">
-                            <a href="${paste.socials}" target="_blank">${paste.socials}</a>
-                        </div>
-                    </div>
-                    <div class="paste-field">
-                        <span class="field-label">Alias</span>
-                        <div class="field-value">${paste.alias}</div>
-                    </div>
-                `;
-                container.appendChild(box);
-            });
-        }
+    data.forEach(paste => {
+        const box = document.createElement('div');
+        box.className = 'paste-box';
+        box.innerHTML = `
+            <h2 class="box-title">${paste.title}</h2>
+            ${paste.image ? `
+                <div class="image-container">
+                    <img src="${paste.image}" class="paste-image" alt="Proof">
+                </div>` : ''}
+            <div class="paste-field">
+                <span class="field-label">Reason</span>
+                <div class="field-value">${paste.reason}</div>
+            </div>
+            <div class="paste-field">
+                <span class="field-label">COM</span>
+                <div class="field-value">${paste.com}</div>
+            </div>
+            <div class="paste-field socials-field">
+                <span class="field-label">Socials</span>
+                <div class="field-value">
+                    ${Array.isArray(paste.socials)
+                        ? paste.socials.map(s => `<a href="${s.url}" target="_blank">${s.label}</a>`).join(', ')
+                        : 'N/A'}
+                </div>
+            </div>
+            <div class="paste-field">
+                <span class="field-label">Alias</span>
+                <div class="field-value">${paste.alias}</div>
+            </div>
+        `;
+        container.appendChild(box);
+    });
+}
 
-        // Search
+
+    
         const searchBar = document.getElementById('searchBar');
         searchBar.addEventListener('input', () => {
             const searchTerm = searchBar.value.toLowerCase();
