@@ -319,7 +319,7 @@
 
         
         async function loadPastes() {
-    const res = await fetch('pastes.json');
+    const res = await fetch('pastes.json?v=' + new Date().getTime());
     const data = await res.json();
     const container = document.getElementById('pastesContainer');
 
